@@ -10,11 +10,11 @@ const Stack = createStackNavigator();
 function StackNavigator() {
     return (
       <NavigationContainer>
-      <Stack.Navigator initialRouteName='QuantityHome'>
-        <Stack.Screen name="QuantityHome" component={QuantityHome} />
-        <Stack.Screen name="TemperatureScreen" component={TemperatureScreen}/>
-        <Stack.Screen name="LengthScreen" component={LengthScreen} />
-        <Stack.Screen name="WeightScreen" component={WeightScreen} />
+      <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen name="Home" component={QuantityHome} options={{title: "Home"}}/>
+        <Stack.Screen name="Temperature" component={TemperatureScreen}/>
+        <Stack.Screen name="Length" component={LengthScreen} />
+        <Stack.Screen name="Weight" component={WeightScreen} />
       </Stack.Navigator>
       </NavigationContainer>
     )
