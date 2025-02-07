@@ -11,11 +11,10 @@ function StackNavigator() {
     return (
       <NavigationContainer>
       <Stack.Navigator initialRouteName='QuantityHome'>
-        <Stack.Screen name="QuantityHome" component={QuantityHome} 
-        options={{title: "Home Screen"}}/>
+        <Stack.Screen name="QuantityHome" component={QuantityHome} />
+        <Stack.Screen name="TemperatureScreen" component={TemperatureScreen}/>
         <Stack.Screen name="LengthScreen" component={LengthScreen} />
         <Stack.Screen name="WeightScreen" component={WeightScreen} />
-        <Stack.Screen name="TemperatureScreen" component={TemperatureScreen}/>
       </Stack.Navigator>
       </NavigationContainer>
     )

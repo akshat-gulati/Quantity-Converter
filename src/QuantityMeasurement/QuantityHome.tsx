@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
 import React from 'react'
 import LengthScreen from './LengthScreen'
+import WeightScreen from './WeightScreen'
+import TemperatureScreen from './TemperatureScreen'
 import { useNavigation } from '@react-navigation/native'
 
 const QuantityHome = () => {
@@ -10,8 +12,12 @@ const QuantityHome = () => {
     <Image style={styles.bgImage} source={require('../Assets/project.jpg')} />
     <View style={styles.container}>
       <Text style={styles.textStyle} onPress={()=>navigation.navigate("LengthScreen")}> Length </Text>
-      <Text style={styles.textStyle}>Weight</Text>
-      <Text style={styles.textStyle}>Temperature</Text>
+
+
+      <Text onPress={()=>navigation.navigate("WeightScreen")} style={styles.textStyle}>Weight</Text>
+
+
+      <Text onPress={()=>navigation.navigate("TemperatureScreen")} style={styles.textStyle}>Temperature</Text>
     </View>
     </View>
   )

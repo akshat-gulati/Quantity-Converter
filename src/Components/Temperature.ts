@@ -1,6 +1,6 @@
-type TemperatureUnit = 'Celsius' | 'Fahrenheit' | 'Kelvin';
+export type UnitType = 'Celsius' | 'Fahrenheit' | 'Kelvin';
 
-function convertTemperature(value: number, fromUnit: TemperatureUnit, toUnit: TemperatureUnit): number {
+export function convertTemperature(value: number, fromUnit: UnitType, toUnit: UnitType): number {
     if (fromUnit === toUnit) {
         return value;
     }
@@ -27,7 +27,3 @@ function convertTemperature(value: number, fromUnit: TemperatureUnit, toUnit: Te
         throw new Error('Unsupported temperature unit');
     }
 }
-
-
-const tempInFahrenheit = convertTemperature(100, 'Celsius', 'Fahrenheit');
-console.log(tempInFahrenheit); 
