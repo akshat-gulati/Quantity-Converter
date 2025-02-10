@@ -20,4 +20,18 @@ function StackNavigator() {
     )
   }
 
+
+  function AuthNavigator() {
+    return (
+      <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen name="Home" component={QuantityHome} options={{title: "Home"}}/>
+        <Stack.Screen name="Temperature" component={TemperatureScreen}/>
+        <Stack.Screen name="Length" component={LengthScreen} />
+        <Stack.Screen name="Weight" component={WeightScreen} />
+      </Stack.Navigator>
+      </NavigationContainer>
+    )
+  }
+
 export default StackNavigator
