@@ -1,45 +1,76 @@
 import { Button, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
-    const [phone, setPhone] = useState('');
-    const [boole, setBoole] = useState(true);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isRegistered, setIsRegistered] = useState(false);
+
+    useEffect(() => {
+        const checkUsername = async () => {
+            const storedPassword = await AsyncStorage.getItem(username);
+            if (storedPassword) {
+                setIsRegistered(true);
+            } else {
+                setIsRegistered(false);
+            }
+        };
+
+        if (username) {
+            checkUsername();
+        }
+    }, [username]);
+
+    const handleLogin = async () => {
+        if (isRegistered) {
+            const storedPassword = await AsyncStorage.getItem(username);
+            if (storedPassword === password) {
+                alert(`Hi ${username}`);
+            } else {
+                alert('Incorrect password');
+            }
+        } else {
+            await AsyncStorage.setItem(username, password);
+            alert(`Hi ${username}`);
+        }
+    };
 
     return (
-        <SafeAreaView style={styles.SafeArea} >
+        <SafeAreaView style={styles.SafeArea}>
             <View style={styles.container}>
-            <Image style={styles.bgImage} source={require('../../Assets/Login.jpg')}/>
-            <View style={styles.overlay}>
-                <View style={styles.titleSection}>
-                    <Text style={styles.titleText}>Login & Signup</Text>
-                </View>
-                <View style={styles.authView}>
-                    <View style={styles.inputSectionEach}>
-                        <Text style={styles.text}>Enter Your Phone</Text>
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Enter Phone Number"
-                            keyboardType="numeric"
-                            value={phone}
-                            onChangeText={setPhone}
-                        />
+                <Image style={styles.bgImage} source={require('../../Assets/Login.jpg')} />
+                <View style={styles.overlay}>
+                    <View style={styles.titleSection}>
+                        <Text style={styles.titleText}>Login & Signup</Text>
                     </View>
-                    {boole && (
+                    <View style={styles.authView}>
+                        <View style={styles.inputSectionEach}>
+                            <Text style={styles.text}>Enter Your Username</Text>
+                            <TextInput
+                                style={styles.input}
+                                placeholder="Enter your Username"
+                                value={username}
+                                onChangeText={setUsername}
+                            />
+                        </View>
+
                         <View style={styles.inputSectionEach}>
                             <Text style={styles.text}>Enter Your Password</Text>
                             <TextInput
                                 style={styles.input}
                                 placeholder="Enter Password"
                                 secureTextEntry
+                                value={password}
+                                onChangeText={setPassword}
                             />
                         </View>
-                    )}
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Submit</Text>
-                    </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                            <Text style={styles.buttonText}>Login</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
-            
             </View>
         </SafeAreaView>
     );
@@ -48,8 +79,8 @@ const Login = () => {
 export default Login;
 
 const styles = StyleSheet.create({
-    SafeArea:{
-        flex:1
+    SafeArea: {
+        flex: 1
     },
     container: {
         flex: 1,
@@ -62,25 +93,17 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         resizeMode: 'cover',
-        opacity:0.2
-        
+        opacity: 0.2
     },
     overlay: {
-        // flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        // backgroundColor:'#ffffff90',
-        // borderWidth: 1,
-        borderRadius:15,
-        
-        
-
+        borderRadius: 15,
     },
     titleSection: {
         marginBottom: 40,
         alignItems: 'center',
-
     },
     titleText: {
         fontSize: 34,
@@ -99,7 +122,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginBottom: 5,
         color: 'black',
-        fontSize:15
+        fontSize: 15
     },
     input: {
         paddingHorizontal: 10,
@@ -115,7 +138,6 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: 'pink',
     },
     buttonText: {
         color: 'black',
