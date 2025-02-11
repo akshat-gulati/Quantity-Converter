@@ -1,15 +1,18 @@
-import { Button, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Button, Image, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
-const Login = () => {
-    const [username, setUsername] = useState('');
+const Login = ({ route }) => {
+    const [usernamex, setUsernamex] = useState('');
     const [password, setPassword] = useState('');
+    const { username, setUsername } = route.params;
     const [isRegistered, setIsRegistered] = useState(false);
+    const navigation = useNavigation();
 
     useEffect(() => {
-        const checkUsername = async () => {
-            const storedPassword = await AsyncStorage.getItem(username);
+        const checkUsernamex = async () => {
+            const storedPassword = await AsyncStorage.getItem(usernamex);
             if (storedPassword) {
                 setIsRegistered(true);
             } else {
@@ -17,22 +20,23 @@ const Login = () => {
             }
         };
 
-        if (username) {
-            checkUsername();
+        if (usernamex) {
+            checkUsernamex();
         }
-    }, [username]);
+    }, [usernamex]);
 
     const handleLogin = async () => {
         if (isRegistered) {
-            const storedPassword = await AsyncStorage.getItem(username);
+            const storedPassword = await AsyncStorage.getItem(usernamex);
             if (storedPassword === password) {
-                alert(`Hi ${username}`);
+                setUsername(usernamex); // Set the correct username
+                navigation.navigate('Home');
             } else {
-                alert('Incorrect password');
+                Alert.alert('Incorrect password');
             }
         } else {
-            await AsyncStorage.setItem(username, password);
-            alert(`Hi ${username}`);
+            await AsyncStorage.setItem(usernamex, password);
+            Alert.alert(`Hi ${usernamex}`);
         }
     };
 
@@ -50,8 +54,8 @@ const Login = () => {
                             <TextInput
                                 style={styles.input}
                                 placeholder="Enter your Username"
-                                value={username}
-                                onChangeText={setUsername}
+                                value={usernamex}
+                                onChangeText={setUsernamex}
                             />
                         </View>
 

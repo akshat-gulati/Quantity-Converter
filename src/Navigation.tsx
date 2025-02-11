@@ -1,37 +1,36 @@
-import { NavigationContainer } from "@react-navigation/native"
-import QuantityHome from './QuantityMeasurement/QuantityHome'
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from '@react-navigation/stack';
+import QuantityHome from './QuantityMeasurement/QuantityHome';
 import WeightScreen from './QuantityMeasurement/WeightScreen';
 import TemperatureScreen from './QuantityMeasurement/TemperatureScreen';
-import { createStackNavigator } from '@react-navigation/stack';
 import LengthScreen from './QuantityMeasurement/LengthScreen';
+import Login from "./QuantityMeasurement/Auth/Login";
+import { useState } from "react";
 
 const Stack = createStackNavigator();
 
-function StackNavigator() {
-    return (
-      <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name="Home" component={QuantityHome} options={{title: "Home"}}/>
-        <Stack.Screen name="Temperature" component={TemperatureScreen}/>
-        <Stack.Screen name="Length" component={LengthScreen} />
-        <Stack.Screen name="Weight" component={WeightScreen} />
+
+function Navigation() {
+  const [username, setUsername] = useState('');
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Login'>
+        <Stack.Screen name="Login" component={Login} initialParams={{ username, setUsername }} />
+        <Stack.Screen 
+          name="Home" 
+          component={QuantityHome} 
+          initialParams={{ username, setUsername }} 
+          options={{ 
+            title: "Home",
+            headerLeft: null // This will hide the header left
+          }} 
+        />
+        <Stack.Screen name="Temperature" component={TemperatureScreen} initialParams={{ username, setUsername }} />
+        <Stack.Screen name="Length" component={LengthScreen} initialParams={{ username, setUsername }} />
+        <Stack.Screen name="Weight" component={WeightScreen} initialParams={{ username, setUsername }} />
       </Stack.Navigator>
-      </NavigationContainer>
-    )
-  }
+    </NavigationContainer>
+  );
+}
 
-
-  function AuthNavigator() {
-    return (
-      <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name="Home" component={QuantityHome} options={{title: "Home"}}/>
-        <Stack.Screen name="Temperature" component={TemperatureScreen}/>
-        <Stack.Screen name="Length" component={LengthScreen} />
-        <Stack.Screen name="Weight" component={WeightScreen} />
-      </Stack.Navigator>
-      </NavigationContainer>
-    )
-  }
-
-export default StackNavigator
+export default Navigation;
