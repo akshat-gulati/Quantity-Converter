@@ -6,28 +6,29 @@ import TemperatureScreen from './QuantityMeasurement/TemperatureScreen';
 import LengthScreen from './QuantityMeasurement/LengthScreen';
 import Login from "./QuantityMeasurement/Auth/Login";
 import { useState } from "react";
+import SignUp from "./QuantityMeasurement/Auth/SignUp";
 
 const Stack = createStackNavigator();
 
 
 function Navigation() {
-  const [username, setUsername] = useState('');
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name="Login" component={Login} initialParams={{ username, setUsername }} />
+        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen 
           name="Home" 
           component={QuantityHome} 
-          initialParams={{ username, setUsername }} 
+          
           options={{ 
             title: "Home",
             headerLeft: null // This will hide the header left
           }} 
         />
-        <Stack.Screen name="Temperature" component={TemperatureScreen} initialParams={{ username, setUsername }} />
-        <Stack.Screen name="Length" component={LengthScreen} initialParams={{ username, setUsername }} />
-        <Stack.Screen name="Weight" component={WeightScreen} initialParams={{ username, setUsername }} />
+        <Stack.Screen name="Signup"  component={SignUp}/>
+        <Stack.Screen name="Temperature" component={TemperatureScreen}  />
+        <Stack.Screen name="Length" component={LengthScreen}  />
+        <Stack.Screen name="Weight" component={WeightScreen}  />
       </Stack.Navigator>
     </NavigationContainer>
   );

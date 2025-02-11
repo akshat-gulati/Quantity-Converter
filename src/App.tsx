@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import Navigation from './Navigation';
+import SignUp from './QuantityMeasurement/Auth/SignUp';
 
 const App = () => {
-  
+  const [username, setUsername] = useState('')
   return (
     <View style={{ flex: 1 }}>
       <Navigation />

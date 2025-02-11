@@ -3,40 +3,24 @@ import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
-const Login = ({ route }) => {
+const Login = () => {
     const [usernamex, setUsernamex] = useState('');
     const [password, setPassword] = useState('');
-    const { username, setUsername } = route.params;
-    const [isRegistered, setIsRegistered] = useState(false);
+
     const navigation = useNavigation();
 
-    useEffect(() => {
-        const checkUsernamex = async () => {
-            const storedPassword = await AsyncStorage.getItem(usernamex);
-            if (storedPassword) {
-                setIsRegistered(true);
-            } else {
-                setIsRegistered(false);
-            }
-        };
-
-        if (usernamex) {
-            checkUsernamex();
-        }
-    }, [usernamex]);
-
     const handleLogin = async () => {
-        if (isRegistered) {
-            const storedPassword = await AsyncStorage.getItem(usernamex);
-            if (storedPassword === password) {
-                setUsername(usernamex); // Set the correct username
+        try {
+            const users = JSON.parse(await AsyncStorage.getItem('users')) || [];
+            const user = users.find(user => user.username === usernamex && user.password === password);
+            if (user) {
+                await AsyncStorage.setItem('loggedUser', JSON.stringify(user));
                 navigation.navigate('Home');
             } else {
-                Alert.alert('Incorrect password');
+                Alert.alert('Incorrect username or password');
             }
-        } else {
-            await AsyncStorage.setItem(usernamex, password);
-            Alert.alert(`Hi ${usernamex}`);
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -46,7 +30,7 @@ const Login = ({ route }) => {
                 <Image style={styles.bgImage} source={require('../../Assets/Login.jpg')} />
                 <View style={styles.overlay}>
                     <View style={styles.titleSection}>
-                        <Text style={styles.titleText}>Login & Signup</Text>
+                        <Text style={styles.titleText}>Login</Text>
                     </View>
                     <View style={styles.authView}>
                         <View style={styles.inputSectionEach}>
@@ -72,6 +56,9 @@ const Login = ({ route }) => {
 
                         <TouchableOpacity style={styles.button} onPress={handleLogin}>
                             <Text style={styles.buttonText}>Login</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Signup")}>
+                            <Text style={styles.buttonText}>Create Account</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -142,6 +129,7 @@ const styles = StyleSheet.create({
         height: 40,
         justifyContent: 'center',
         alignItems: 'center',
+        marginBlock: 10
     },
     buttonText: {
         color: 'black',
