@@ -17,7 +17,7 @@ const SignUp = () => {
       users.push(newUser);
       await AsyncStorage.setItem('users', JSON.stringify(users));
       Alert.alert(`${usernamex} registered`);
-      navigation.navigate("Login");
+      navigation.goBack();
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +56,7 @@ const SignUp = () => {
             <TouchableOpacity style={styles.button} onPress={handleRegister}>
               <Text style={styles.buttonText}>Create your Account Now</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Login")}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
           </View>

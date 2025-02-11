@@ -24,6 +24,7 @@ const QuantityHome = () => {
         <Text style={styles.textStyle} onPress={() => navigation.navigate("Length")}> Length </Text>
         <Text onPress={() => navigation.navigate("Weight")} style={styles.textStyle}>Weight</Text>
         <Text onPress={() => navigation.navigate("Temperature")} style={styles.textStyle}>Temperature</Text>
+        <Text onPress={() => navigation.popToTop()} style={styles.textStyle}>Logout</Text>
       </View>
     </View>
   );
