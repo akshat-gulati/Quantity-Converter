@@ -11,6 +11,10 @@ const SignUp = () => {
   const navigation = useNavigation();
 
   const handleRegister = async () => {
+    if (!usernamex || !password) {
+      Alert.alert('Please enter both username and password');
+      return;
+    }
     try {
       const users = JSON.parse(await AsyncStorage.getItem('users')) || [];
       const newUser = { username: usernamex, password: password };

@@ -10,6 +10,11 @@ const Login = () => {
     const navigation = useNavigation();
 
     const handleLogin = async () => {
+        if (!usernamex || !password) {
+            Alert.alert('Please enter both username and password');
+            return;
+        }
+
         try {
             const users = JSON.parse(await AsyncStorage.getItem('users')) || [];
             const user = users.find(user => user.username === usernamex && user.password === password);
