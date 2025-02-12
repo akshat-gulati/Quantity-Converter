@@ -22,6 +22,11 @@ const Login = () => {
         } catch (error) {
             console.error(error);
         }
+        finally {
+            setUsernamex('')
+            setPassword('')
+        }
+
     };
 
     return (
@@ -34,17 +39,17 @@ const Login = () => {
                     </View>
                     <View style={styles.authView}>
                         <View style={styles.inputSectionEach}>
-                            <Text style={styles.text}>Enter Your Username</Text>
+                            <Text style={styles.text}>Username</Text>
                             <TextInput
                                 style={styles.input}
-                                placeholder="Enter your Username"
+                                placeholder="Enter Username"
                                 value={usernamex}
                                 onChangeText={setUsernamex}
                             />
                         </View>
 
                         <View style={styles.inputSectionEach}>
-                            <Text style={styles.text}>Enter Your Password</Text>
+                            <Text style={styles.text}>Password</Text>
                             <TextInput
                                 style={styles.input}
                                 placeholder="Enter Password"
@@ -58,7 +63,7 @@ const Login = () => {
                             <Text style={styles.buttonText}>Login</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Signup")}>
-                            <Text style={styles.buttonText}>Create Account</Text>
+                            <Text style={styles.buttonText}>Create Your Account Now</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

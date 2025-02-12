@@ -16,6 +16,8 @@ const SignUp = () => {
       const newUser = { username: usernamex, password: password };
       users.push(newUser);
       await AsyncStorage.setItem('users', JSON.stringify(users));
+      setUsernamex('')
+      setPassword('')
       Alert.alert(`${usernamex} registered`);
       navigation.goBack();
     } catch (error) {

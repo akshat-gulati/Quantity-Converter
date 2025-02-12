@@ -24,8 +24,8 @@ const QuantityHome = () => {
         <Text style={styles.textStyle} onPress={() => navigation.navigate("Length")}> Length </Text>
         <Text onPress={() => navigation.navigate("Weight")} style={styles.textStyle}>Weight</Text>
         <Text onPress={() => navigation.navigate("Temperature")} style={styles.textStyle}>Temperature</Text>
-        <Text onPress={() => navigation.popToTop()} style={styles.textStyle}>Logout</Text>
       </View>
+      <Text onPress={() => navigation.popToTop()} style={styles.logout}>Logout</Text>
     </View>
   );
 };
@@ -59,6 +59,17 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderRadius: 20,
     marginBottom: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#ffffff90',
+  },
+  logout:{
+    // backgroundColor:'red',
+    alignSelf:'center',
+    marginBottom:50,
+    fontSize:30,
+    borderColor: 'white',
+    borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
     backgroundColor: '#ffffff90',
