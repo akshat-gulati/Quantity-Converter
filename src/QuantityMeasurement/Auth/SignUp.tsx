@@ -12,22 +12,32 @@ const SignUp = () => {
 
   const handleRegister = async () => {
     if (!usernamex || !password) {
-      Alert.alert('Please enter both username and password');
-      return;
+        Alert.alert('Please enter both username and password');
+        return;
     }
     try {
-      const users = JSON.parse(await AsyncStorage.getItem('users')) || [];
-      const newUser = { username: usernamex, password: password };
-      users.push(newUser);
-      await AsyncStorage.setItem('users', JSON.stringify(users));
-      setUsernamex('')
-      setPassword('')
-      Alert.alert(`${usernamex} registered`);
-      navigation.goBack();
+        const users = JSON.parse(await AsyncStorage.getItem('users')) || [];
+        const existingUser = users.find(user => user.username === usernamex);
+
+        if (existingUser) {
+            if (existingUser.password === password) {
+                Alert.alert('Account already exists with this username and password');
+            } else {
+                Alert.alert('Username already exists but the password is incorrect');
+            }
+        } else {
+            const newUser = { username: usernamex, password: password };
+            users.push(newUser);
+            await AsyncStorage.setItem('users', JSON.stringify(users));
+            setUsernamex('');
+            setPassword('');
+            Alert.alert(`${usernamex} registered`);
+            navigation.goBack();
+        }
     } catch (error) {
-      console.error(error);
+        console.error(error);
     }
-  };
+};
 
   return (
     <SafeAreaView style={styles.SafeArea}>
