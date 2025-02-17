@@ -1,12 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
-import QuantityHome from './QuantityMeasurement/QuantityHome';
-import WeightScreen from './QuantityMeasurement/WeightScreen';
-import TemperatureScreen from './QuantityMeasurement/TemperatureScreen';
-import LengthScreen from './QuantityMeasurement/LengthScreen';
-import Login from "./QuantityMeasurement/Auth/Login";
+import QuantityHome from './Screens/QuantityHome';
+import WeightScreen from './Screens/WeightScreen';
+import TemperatureScreen from './Screens/TemperatureScreen';
+import LengthScreen from './Screens/LengthScreen';
+import Login from "./Screens/Auth/Login";
 import { useState } from "react";
-import SignUp from "./QuantityMeasurement/Auth/SignUp";
+import SignUp from "./Screens/Auth/SignUp";
 
 const Stack = createStackNavigator();
 

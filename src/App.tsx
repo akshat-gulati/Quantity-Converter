@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import Navigation from './Navigation';
-import SignUp from './QuantityMeasurement/Auth/SignUp';
+import SignUp from './Screens/Auth/SignUp';
 
 const App = () => {
   const [username, setUsername] = useState('')
