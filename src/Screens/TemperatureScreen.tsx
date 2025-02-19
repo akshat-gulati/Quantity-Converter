@@ -34,7 +34,7 @@ const TemperatureScreen = () => {
   return (
     <ScreenLayout
       title="Length Converter"
-      backgroundImage={require('../Assets/length.jpg')}
+      backgroundImage={require('../Assets/temperature.jpg')}
     >
       <View style={sharedStyles.pickerView}>
         <View style={sharedStyles.eachPicker}>
